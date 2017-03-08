@@ -43,6 +43,16 @@ class load_txt_data(object):
 
         return states
 
+def is_best_move(best, moves):
+
+    #Check if there is a best move
+    for m in moves:
+        if moves[m] > moves[best]:
+            return False
+
+    #If not return true
+    return True
+
 if __name__ == '__main__':
 
     print load_txt_data("logs/sim_improved-learning.txt").get_data()
