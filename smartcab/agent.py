@@ -147,11 +147,17 @@ class LearningAgent(Agent):
                 #Load the action of the state from Q
                 actions = self.Q[state]
 
-                #Loop the action to find the the one with Q-value = maxQ
+                #List of actions with maxQ
+                best_actions = []
+
+                #Loop the actions to find the the one with Q-value = maxQ
                 for x in actions:
                     if actions[x] == maxQ:
-                        action = x
-                        break
+                        best_actions.append(x)
+
+                #Randomly slect one of the best actions
+                action = random.choice(best_actions)
+
  
         return action
 
@@ -220,7 +226,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, display=True, update_delay=1, log_metrics=False, optimized=True)
+    sim = Simulator(env, display=True, update_delay=0.001, log_metrics=False, optimized=True)
     
     ##############
     # Run the simulator
