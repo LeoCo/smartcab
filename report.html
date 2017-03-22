@@ -11860,7 +11860,8 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The smartcab does not move at all, it stands still. However, the rewards are not zero, the smartcab is rewarded positively if the traffic light is red and it is rewarded negatively if the traffic light is green. It all goes on forever because the smartcab, not moving, is in an infinite loop of doing nothing.</p>
+<p>The smartcab does not move at all, it stands still. However, the rewards are not zero, the smartcab is rewarded positively if the traffic light is red and if the fraffic light it is green while all the lanes to make a turn are busy.
+It is rewarded negatively if the traffic light is green and there is at least one lane free. It all goes on forever because the smartcab, not moving, is in an infinite loop of doing nothing.</p>
 
 </div>
 </div>
@@ -18418,7 +18419,21 @@ Wrong states: 24
 <li>137 correct states</li>
 <li>24 wrong states</li>
 </ul>
-<p>Since the wrong states are not 0, it is a sufficient and necessary condition to say that our driving agent implements a suboptimal policy.</p>
+<p>Since the wrong states are not 0, it is a sufficient and necessary condition to say that our driving agent implements some suboptimal policies.</p>
+<p>In fact we can find optimal policies like:</p>
+<p>('forward', 'green', None, None, None)
+ -- None : -5.96
+ -- forward : 1.06
+ -- right : -0.00
+ -- left : 0.35</p>
+<p>In this case, where the traffic light is green and there are no cars everywhere, the maximum reward is to proceed forward and it is the best action to take.</p>
+<p>However we have also some suboptimal policies like:</p>
+<p>('left', 'red', 'left', None, 'right')
+ -- None : 0.00
+ -- forward : -9.55
+ -- right : 0.76
+ -- left : 0.00</p>
+<p>Where the smartcab should wait but the maximum reward is to turn right.</p>
 
 </div>
 </div>
@@ -18450,7 +18465,8 @@ Wrong states: 24
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The smartcab can sense only the next environment states and the states randomly behave one state to the other (Traffic lights and dummy cars). That is why it does not make sense to implement a discount factor on an uncertain and not possible to feel next state.</p>
+<p>Since the destination of the smartcab, the starting point and the distance between them always chage, to have a the shortest path we don't know how many futre rewards are needed. That is why it is impossible to implement a discount factor based on future rewards and it is better to let the smartcab sense the next environment states to find the shortest path.</p>
+<p>The same is for the environment, we don't know how the destination (and the distance to reach it) of the other cars, this makes impossible to implement future rewards policies also for the environment because we don't know how many futures states we should need.</p>
 
 </div>
 </div>
